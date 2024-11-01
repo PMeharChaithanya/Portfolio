@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* Lighter, more subtle gradient */
+  background: linear-gradient(
+    to bottom,
+    #030014 0%,
+    #050019 30%,
+    #080027 60%,
+    #0a0032 100%
+  );
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Add a subtle noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.2;  /* Reduced opacity */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.main-gradient {
+  background: radial-gradient(
+    circle at top center,
+    var(--gradient-color-1) 0%,
+    var(--gradient-color-2) 30%,
+    transparent 70%
+  );
+}
+
+:root[data-theme="dark"] {
+  --gradient-color-1: rgba(93, 52, 236, 0.1);
+  --gradient-color-2: rgba(93, 52, 236, 0.05);
+}
+
+:root[data-theme="light"] {
+  --gradient-color-1: rgba(59, 130, 246, 0.1);
+  --gradient-color-2: rgba(59, 130, 246, 0.05);
+}
+
+.section-gradient {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    var(--section-gradient-color) 30%,
+    var(--section-gradient-color) 70%,
+    transparent 100%
+  );
+}
+
+:root[data-theme="dark"] {
+  --section-gradient-color: rgba(93, 52, 236, 0.03);
+}
+
+:root[data-theme="light"] {
+  --section-gradient-color: rgba(59, 130, 246, 0.03);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Update Cursor Styles */
+.cursor-dot {
+  width: 8px; /* Smaller dot */
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+  transform-origin: center;
+  mix-blend-mode: difference; /* Makes cursor visible on any background */
+}
+
+.cursor-ring {
+  width: 32px; /* Smaller ring */
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 999;
+  transform-origin: center;
+  mix-blend-mode: difference;
+}
+
+/* Gradient Animations */
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500;
+}
+
+/* Hide cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+/* Smooth scrollbar for desktop */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #030014;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+    border-radius: 5px;
+  }
+}
+
+/* Add after existing styles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Add after your existing styles */
+.scroll-section {
+  position: relative;
+  transition: background-color 0.5s ease;
+}
+
+/* Smooth transition for background changes */
+.fixed {
+  transition: background-color 0.7s ease-in-out;
+}
+
+/* Add a subtle noise texture overlay */
+.main-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Gradient transitions */
+.bg-transition {
+  transition: all 0.7s ease-in-out;
+}
+
+/* Update section transitions */
+section {
+  position: relative;
+  transition: background-color 0.5s ease;
+}
+
+/* Add subtle glow to sections */
+section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    rgba(93, 52, 236, 0.01) 0%,   /* Very subtle glow */
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Update the Hero section gradient */
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(93, 52, 236, 0.03) 0%,   /* Reduced opacity */
+    transparent 70%
+  );
+  pointer-events: none;
+}
