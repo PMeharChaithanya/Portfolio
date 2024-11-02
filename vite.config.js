@@ -3,8 +3,25 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/portfolio/',
+  optimizeDeps: {
+    include: [
+      'framer-motion',
+      'react-icons/hi',
+      'react-icons/si',
+      'typed.js',
+      'react-type-animation'
+    ]
+  },
   build: {
-    outDir: 'dist'
+    rollupOptions: {
+      external: [],
+      output: {
+        manualChunks: {
+          'framer-motion': ['framer-motion'],
+          'react-type-animation': ['react-type-animation'],
+          'typed': ['typed.js']
+        }
+      }
+    }
   }
 })
