@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import profileImage from '../assets/me.png';
 
 const About = () => {
   return (
@@ -66,7 +67,7 @@ const About = () => {
             <div className="w-full h-full rounded-full overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 z-10 rounded-full" />
               <img
-                src="/me.png"
+                src={profileImage}
                 alt="Profile"
                 className="w-full h-full object-cover object-center scale-100 hover:scale-105 transition-transform duration-500"
                 style={{
