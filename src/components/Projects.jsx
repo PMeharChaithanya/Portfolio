@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const Projects = () => {
   const projects = [
     {
-      title: " Simplification Platform",
+      title: "Tax Simplification Platform",
       description: "A comprehensive tax management platform designed for Indian citizens, featuring tax calculators, AI assistance, and investment recommendations. Built to simplify tax filing and financial planning.",
       tech: ["React", "Node.js", "AI/ML", "MongoDB", "Express", "TailwindCSS"],
       features: [
