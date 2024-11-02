@@ -14,7 +14,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-5xl md:text-7xl font-bold mb-6"
+          className="text-3xl sm:text-5xl md:text-7xl font-bold mb-6 px-4"
         >
           Hi, I'm <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Mehar Chaithanya</span>
         </motion.h1>

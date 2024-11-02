@@ -29,86 +29,73 @@ const Navbar = () => {
   };
 
   return (
-    <>
-      <motion.nav
-        className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm ${
-          isDark 
-            ? 'bg-primary-dark/80' 
-            : 'bg-light-bg/80 border-b border-light-border'
-        }`}
-        initial={{ y: 0 }}
-        animate={{ y: hidden ? -100 : 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <motion.a
-              href="#hero"
-              className={`text-2xl font-bold ${
-                isDark ? 'text-white' : 'text-light-text'
-              }`}
-              whileHover={{ scale: 1.05 }}
-            >
-              Portfolio
-            </motion.a>
-            
-            <div className="flex space-x-8">
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-primary-dark/80">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <motion.a
+            href="#hero"
+            className="text-2xl font-bold text-white"
+            whileHover={{ scale: 1.05 }}
+          >
+            Portfolio
+          </motion.a>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden p-2 rounded-md text-gray-400 hover:text-white"
+          >
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+
+          {/* Desktop menu */}
+          <div className="hidden md:flex space-x-8">
+            {navItems.map((item) => (
+              <motion.a
+                key={item}
+                href={`#${item.toLowerCase()}`}
+                className="text-gray-300 hover:text-white transition-colors duration-200"
+                whileHover={{ scale: 1.05 }}
+              >
+                {item}
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-primary-dark/95 border-t border-white/10"
+          >
+            <div className="px-4 py-2 space-y-1">
               {navItems.map((item) => (
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className={`${
-                    isDark 
-                      ? 'text-gray-300 hover:text-white' 
-                      : 'text-light-muted hover:text-light-text'
-                  } transition-colors duration-200`}
-                  whileHover={{ scale: 1.05 }}
+                  className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-white/10 rounded-md"
+                  onClick={() => setMobileMenuOpen(false)}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {item}
                 </motion.a>
               ))}
             </div>
-          </div>
-        </div>
-      </motion.nav>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-16 z-40 md:hidden"
-          >
-            <div className="bg-black/95 backdrop-blur-lg border-b border-white/10 py-4">
-              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col space-y-4">
-                {navItems.map((item) => (
-                  <motion.button
-                    key={item}
-                    onClick={() => handleNavClick(item)}
-                    className="text-gray-300 hover:text-white py-2 text-center"
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {item}
-                  </motion.button>
-                ))}
-                <motion.a
-                  href="/resume.pdf" // Add your resume file
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-blue-500 to-purple-500 hover:opacity-90 transition-opacity text-center"
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Resume
-                </motion.a>
-              </div>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </nav>
   );
 };
 

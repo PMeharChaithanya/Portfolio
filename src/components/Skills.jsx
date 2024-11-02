@@ -51,24 +51,43 @@ const Skills = () => {
           <div className="h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full" />
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
           {skills.map((skill, index) => (
             <motion.div
               key={skill.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ 
+                duration: 0.5,
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 100
+              }}
               viewport={{ once: true }}
-              whileHover={{ scale: 1.05 }}
-              className="relative group"
+              whileHover={{ 
+                scale: 1.1,
+                rotate: [0, -5, 5, -5, 0],
+                transition: {
+                  duration: 0.3,
+                  rotate: {
+                    repeat: 0,
+                    duration: 0.5
+                  }
+                }
+              }}
+              className="p-4 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 
+                         flex flex-col items-center gap-2 cursor-pointer transform-gpu"
             >
-              <div className="bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative flex flex-col items-center">
-                  <skill.icon className={`w-12 h-12 ${skill.color} mb-4`} />
-                  <h3 className="text-lg font-medium text-white">{skill.name}</h3>
-                </div>
-              </div>
+              <motion.div
+                whileHover={{ 
+                  scale: 1.2,
+                  rotate: 360,
+                  transition: { duration: 0.5 }
+                }}
+              >
+                <skill.icon className={`text-3xl sm:text-4xl ${skill.color}`} />
+              </motion.div>
+              <span className="text-sm text-gray-300 font-medium">{skill.name}</span>
             </motion.div>
           ))}
         </div>

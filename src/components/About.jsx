@@ -62,7 +62,7 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
             viewport={{ once: true }}
-            className="relative w-[250px] h-[250px] mx-auto lg:ml-auto"
+            className="relative w-[200px] sm:w-[250px] h-[200px] sm:h-[250px] mx-auto lg:ml-auto mt-8 lg:mt-0"
           >
             <div className="w-full h-full rounded-full overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 z-10 rounded-full" />
